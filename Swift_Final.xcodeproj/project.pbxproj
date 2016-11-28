@@ -13,6 +13,7 @@
 		FD3A41DD1DEBACA00025BB00 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD3A41DB1DEBACA00025BB00 /* Main.storyboard */; };
 		FD3A41E81DEBACA00025BB00 /* Swift_FinalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3A41E71DEBACA00025BB00 /* Swift_FinalTests.swift */; };
 		FD3A41F31DEBACA00025BB00 /* Swift_FinalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3A41F21DEBACA00025BB00 /* Swift_FinalUITests.swift */; };
+		FD3A42011DEBADFD0025BB00 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3A42001DEBADFD0025BB00 /* GameViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		FD3A41EE1DEBACA00025BB00 /* Swift_FinalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Swift_FinalUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD3A41F21DEBACA00025BB00 /* Swift_FinalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swift_FinalUITests.swift; sourceTree = "<group>"; };
 		FD3A41F41DEBACA00025BB00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FD3A42001DEBADFD0025BB00 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 				FD3A41D71DEBACA00025BB00 /* ViewController.swift */,
 				FD3A41D91DEBACA00025BB00 /* Assets.xcassets */,
 				FD3A41DB1DEBACA00025BB00 /* Main.storyboard */,
+				FD3A42001DEBADFD0025BB00 /* GameViewController.swift */,
 				FD3A41DE1DEBACA00025BB00 /* Info.plist */,
 			);
 			path = Swift_Final;
@@ -256,6 +259,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD3A41D81DEBACA00025BB00 /* ViewController.swift in Sources */,
+				FD3A42011DEBADFD0025BB00 /* GameViewController.swift in Sources */,
 				FD3A41D61DEBACA00025BB00 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
