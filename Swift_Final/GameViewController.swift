@@ -54,7 +54,7 @@ class GameViewController: NSViewController {
     //won boolean
     var won = false
     var score = 0
-    var attempts = 15
+    var attempts = 10
     
     
     //initializing previous button variable
@@ -110,69 +110,18 @@ class GameViewController: NSViewController {
         if( attempts > 1){
             print(match)
             //If pressed is reset and there is not a match
-            if(press == 0 && match[index] != true){
-                if ( previousButton != nil && previousButton.image != NSImage(named: "back") && prevPreviousButton.image != NSImage(named: "back")){
-                    previousButton.image = NSImage(named: "back")
-                    prevPreviousButton.image = NSImage(named: "back")
-                }
-                
-                
-
-                button.image = NSImage(named:cardArray[index])
-                prevPreviousButton = previousButton
-                index_of_prevPrevious = index_of_previous
-                //Setting the previous string to the current string
-                sPrevious = cardArray[index]
-                //Setting the previous button to the current button
-                previousButton = button
-                //Settring the current index to the previous index
-                index_of_previous = index
-                //Setting press to 1
-                press = 1
-                
-            }
-            //if two cards haven't been pressed and there has not already been a match
-            else if(press == 1 && match[index] != true){
-                button.image = NSImage(named:cardArray[index])
-                //Reset number of presses
-                press = 0
-        //Update number of attempts
-                attempts = attempts - 1
-                attemptLabel.stringValue = "\(attempts)"
-                
-       //If the string of the current card is equal to the string of the previous
-                
-                if(cardArray[index] == sPrevious && index != index_of_previous){
-                    //Set match to true for current card and the previous card
-                    match[index] = true
-                    match[index_of_previous] = true
-                    //Checking to see if all the cards have been matched
-                    score = score + 1
-                   scoreLabel.stringValue = "\(score)"
-                    for item in match{
-                        if (item == false){
-                            won = false
-                            break
-                        }
-                        else
-                        {
-                            won = true
-                        }
+            if ((button != previousButton || button != prevPreviousButton) || previousButton != prevPreviousButton){
+            
+            
+                if(press == 0 && match[index] != true){
+                    if ( (match[index_of_previous] != true && match[index_of_prevPrevious] != true) && previousButton != nil && prevPreviousButton != nil && previousButton.image != NSImage(named: "back") && prevPreviousButton.image != NSImage(named: "back")){
+                        previousButton.image = NSImage(named: "back")
+                        prevPreviousButton.image = NSImage(named: "back")
                     }
-                    //Checking if the player has won
-                    if(won == true){
-                        winloseLabel.stringValue = "You Won!"
-
-                    }
-
-                }
-                    //Sets the button back to the back of the card if it is not a match
-                else if(match[index] != true){
-//                    timer = Timer.scheduledTimer(timeInterval: 10.0, target: button, selector:#selector(switchThing), userInfo: nil, repeats: true)
-//                    timer.invalidate()
+                    
+                    
 
                     button.image = NSImage(named:cardArray[index])
-                    press = 0
                     prevPreviousButton = previousButton
                     index_of_prevPrevious = index_of_previous
                     //Setting the previous string to the current string
@@ -181,30 +130,68 @@ class GameViewController: NSViewController {
                     previousButton = button
                     //Settring the current index to the previous index
                     index_of_previous = index
-
+                    //Setting press to 1
+                    press = 1
                     
-                   
                 }
-                
-                
+                //if two cards haven't been pressed and there has not already been a match
+                else if(press == 1 && match[index] != true){
+                    button.image = NSImage(named:cardArray[index])
+                    //Reset number of presses
+                    press = 0
+            //Update number of attempts
+                    attempts = attempts - 1
+                    attemptLabel.stringValue = "\(attempts)"
+                    
+           //If the string of the current card is equal to the string of the previous
+                    
+                    if(cardArray[index] == sPrevious && index != index_of_previous){
+                        //Set match to true for current card and the previous card
+                        match[index] = true
+                        match[index_of_previous] = true
+                        //Checking to see if all the cards have been matched
+                        score = score + 1
+                       scoreLabel.stringValue = "\(score)"
+                        for item in match{
+                            if (item == false){
+                                won = false
+                                break
+                            }
+                            else
+                            {
+                                won = true
+                            }
+                        }
+                        //Checking if the player has won
+                        if(won == true){
+                            winloseLabel.stringValue = "You Won!"
+
+                        }
+
+                    }
+                        //Sets the button back to the back of the card if it is not a match
+                    else if(match[index] != true){
+    //                    timer = Timer.scheduledTimer(timeInterval: 10.0, target: button, selector:#selector(switchThing), userInfo: nil, repeats: true)
+    //                    timer.invalidate()
+
+                        button.image = NSImage(named:cardArray[index])
+                        press = 0
+                        prevPreviousButton = previousButton
+                        index_of_prevPrevious = index_of_previous
+                        //Setting the previous string to the current string
+                        sPrevious = cardArray[index]
+                        //Setting the previous button to the current button
+                        previousButton = button
+                        //Settring the current index to the previous index
+
+                        
+                       
+                    }
+                    
+                    
+                }
             }
-                //If two cards haven't been pressed
-//            else if(press == 2 && match[index] != true){
-//                //if(prevPreviousButton != nil){
-//                prevPreviousButton.image = (NSImage(named:"back"))//}
-//                previousButton.image = NSImage(named: "back")
-//                button.image = NSImage(named:cardArray[index])
-//                //Setting the previous string to the current string
-//                sPrevious = cardArray[index]
-//                prevPreviousButton = previousButton
-//                index_of_prevPrevious = index_of_previous
-//                //Setting the previous button to the current button
-//                previousButton = button
-//                //Settring the current index to the previous index
-//                index_of_previous = index
-//                //Setting press to 1
-//                press = 1
-//            }
+
         }
         else if(attempts == 1){
             attempts = attempts - 1
