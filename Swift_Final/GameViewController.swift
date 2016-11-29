@@ -47,46 +47,30 @@ extension Sequence {
 class GameViewController: NSViewController {
     //number of card presses
     var press = 0
+    //
     var sPrevious = "empty"
     var sPrevPrevious = "empty"
-    //match boolean array
+    //Used to check if a card has been matched or not
     var match = [false,false,false,false,false,false,false,false,false,false,false,false]
     //won boolean
     var won = false
+    //Score and attempt variables that will be updated during the game
     var score = 0
-    var attempts = 10
-    
-    
-    //initializing previous button variable
+    var attempts = 15
+    //initializing previous button and prevPrevious variable
     var previousButton: NSButton!
     var prevPreviousButton: NSButton!
     @IBOutlet var scoreLabel: NSTextField!
-    
     @IBOutlet var attemptLabel: NSTextField!
+    //Label to tell the user if they have won or lost
     @IBOutlet var winloseLabel: NSTextField!
+
     
-    @IBOutlet var Button12: NSButton!
-    @IBOutlet var Button11: NSButton!
-    @IBOutlet var Button10: NSButton!
-    @IBOutlet var Button9: NSButton!
-    @IBOutlet var Button8: NSButton!
-    @IBOutlet var Button7: NSButton!
-    @IBOutlet var Button6: NSButton!
-    @IBOutlet var Button5: NSButton!
-    @IBOutlet var Button4: NSButton!
-    @IBOutlet var Button3: NSButton!
-    @IBOutlet var Button2: NSButton!
-    @IBOutlet var Button1: NSButton!
-    
-    //attemptLabel.stringValue = "\(attempts)"
-    //scoreLabel.stringValue = "\(score)"
-    //initializing the card array
+    //initializing the card array that will be shuffled
     var cardArray = ["card1","card1","card2","card2","card3","card3","card4","card4","card5","card5","card6","card6"]
     //Initiallizing the index of the previous array
     var index_of_previous = 11
     var index_of_prevPrevious = 11
-    var timer = Timer()
-    
     //Loading the viewController
     
     override func viewDidLoad() {
@@ -99,45 +83,38 @@ class GameViewController: NSViewController {
         
         
     }
-    func switchThing(index: Int,  button: NSButton){
-        button.image = NSImage(named:cardArray[index])
-
-        
-
-        
-    }
     func buttonFunction(index: Int, button: NSButton ){
+        //If statement that checks how many times the user has attempted a turn
         if( attempts > 1){
-            print(match)
-            //If pressed is reset and there is not a match
             if ((button != previousButton || button != prevPreviousButton) || previousButton != prevPreviousButton){
             
-            
+                //If pressed is reset and there is not a match
                 if(press == 0 && match[index] != true){
+                    //Flips the two cards back if there has not been a match
                     if ( (match[index_of_previous] != true && match[index_of_prevPrevious] != true) && previousButton != nil && prevPreviousButton != nil && previousButton.image != NSImage(named: "back") && prevPreviousButton.image != NSImage(named: "back")){
                         previousButton.image = NSImage(named: "back")
                         prevPreviousButton.image = NSImage(named: "back")
                     }
                     
                     
-
+                //Sets the image of the button to the card at the specific index
                     button.image = NSImage(named:cardArray[index])
                     prevPreviousButton = previousButton
                     index_of_prevPrevious = index_of_previous
-                    //Setting the previous string to the current string
+                //Setting the previous string to the current string
                     sPrevious = cardArray[index]
-                    //Setting the previous button to the current button
+                //Setting the previous button to the current button
                     previousButton = button
-                    //Settring the current index to the previous index
+                //Settring the current index to the previous index
                     index_of_previous = index
-                    //Setting press to 1
+                //Setting press to 1
                     press = 1
                     
                 }
                 //if two cards haven't been pressed and there has not already been a match
                 else if(press == 1 && match[index] != true){
                     button.image = NSImage(named:cardArray[index])
-                    //Reset number of presses
+                //Reset number of presses
                     press = 0
             //Update number of attempts
                     attempts = attempts - 1
@@ -145,13 +122,14 @@ class GameViewController: NSViewController {
                     
            //If the string of the current card is equal to the string of the previous
                     
-                    if(cardArray[index] == sPrevious && index != index_of_previous){
-                        //Set match to true for current card and the previous card
+                    if(cardArray[index] == sPrevious && index != index_of_previous ){
+            //Set match to true for current card and the previous card
                         match[index] = true
                         match[index_of_previous] = true
-                        //Checking to see if all the cards have been matched
+                //Checking to see if all the cards have been matched
                         score = score + 1
                        scoreLabel.stringValue = "\(score)"
+            //Goes through and checks if the player has lost if there are any items equal to false it breaks out of the loop
                         for item in match{
                             if (item == false){
                                 won = false
@@ -162,17 +140,15 @@ class GameViewController: NSViewController {
                                 won = true
                             }
                         }
-                        //Checking if the player has won
+                    //Checking if the player has won
                         if(won == true){
                             winloseLabel.stringValue = "You Won!"
 
                         }
 
                     }
-                        //Sets the button back to the back of the card if it is not a match
-                    else if(match[index] != true){
-    //                    timer = Timer.scheduledTimer(timeInterval: 10.0, target: button, selector:#selector(switchThing), userInfo: nil, repeats: true)
-    //                    timer.invalidate()
+            //Sets the prePreviousbutton to the previousButton if it is not a match
+                    else if(match[index] != true && button != previousButton){
 
                         button.image = NSImage(named:cardArray[index])
                         press = 0
@@ -182,7 +158,7 @@ class GameViewController: NSViewController {
                         sPrevious = cardArray[index]
                         //Setting the previous button to the current button
                         previousButton = button
-                        //Settring the current index to the previous index
+                        //Setting the current index to the previous index
 
                         
                        
