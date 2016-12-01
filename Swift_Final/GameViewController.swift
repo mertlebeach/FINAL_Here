@@ -56,7 +56,7 @@ class GameViewController: NSViewController {
     var won = false
     //Score and attempt variables that will be updated during the game
     var score = 0
-    var attempts = 15
+    var attempts = 10
     //initializing previous button and prevPrevious variable
     var previousButton: NSButton!
     var prevPreviousButton: NSButton!
@@ -85,7 +85,7 @@ class GameViewController: NSViewController {
     }
     func buttonFunction(index: Int, button: NSButton ){
         //If statement that checks how many times the user has attempted a turn
-        if( attempts > 1){
+        if(attempts > 1){
             if ((button != previousButton || button != prevPreviousButton) || previousButton != prevPreviousButton){
             
                 //If pressed is reset and there is not a match
@@ -112,7 +112,7 @@ class GameViewController: NSViewController {
                     
                 }
                 //if two cards haven't been pressed and there has not already been a match
-                else if(press == 1 && match[index] != true){
+                else if(press == 1 && match[index] != true && button != previousButton){
                     button.image = NSImage(named:cardArray[index])
                 //Reset number of presses
                     press = 0
@@ -179,7 +179,6 @@ class GameViewController: NSViewController {
     //Action function for the end game button
     @IBAction func dismiss(_ sender: AnyObject) {
         self.dismissViewController(self)
-        
         
     }
     @IBAction func Button12_Action(_ sender: AnyObject) {
